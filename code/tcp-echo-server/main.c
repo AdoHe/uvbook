@@ -3,7 +3,12 @@
 #include <string.h>
 #include <uv.h>
 
+<<<<<<< HEAD
 #define DEFAULT_PORT 8000
+=======
+#define DEFAULT_PORT 7000
+#define DEFAULT_BACKLOG 128
+>>>>>>> FETCH_HEAD
 
 uv_loop_t *loop;
 struct sockaddr_in addr;
@@ -58,8 +63,14 @@ int main() {
     uv_tcp_init(loop, &server);
 
     uv_ip4_addr("0.0.0.0", DEFAULT_PORT, &addr);
+<<<<<<< HEAD
     uv_tcp_bind(&server, (const struct sockaddr *)&addr, 0);
     int r = uv_listen((uv_stream_t*) &server, 128, on_new_connection);
+=======
+
+    uv_tcp_bind(&server, (const struct sockaddr*)&bind_addr, 0);
+    int r = uv_listen((uv_stream_t*) &server, DEFAULT_BACKLOG, on_new_connection);
+>>>>>>> FETCH_HEAD
     if (r) {
         fprintf(stderr, "Listen error %s\n", uv_strerror(r));
         return 1;
